@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <color name="toolTipTextBackground">#5A5A5A</color>
+    <color name="toolTipTextColor">#FFFFFFFF</color>
     <color name="enabledTextColor">#FF3C3C3C</color>
     <color name="disabledTextColor">#B9BCBE</color>
     <color name="disabledIconColor">#B9BCBE</color>
-    <color name="enableIconColor">#2196F3</color>
+    <color name="enabledIconColor">#2196F3</color>
     <color name="dividerColor">#2196F3</color>
 </resources>

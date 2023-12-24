@@ -3,17 +3,22 @@ package com.fa.slippybottombar
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import com.fa.lib.SlippyBar
 import com.fa.lib.SlippyBottomBar
+import com.fa.lib.SlippyDividerStyle
+import com.fa.lib.SlippyIconStyle
 import com.fa.lib.SlippyTab
+import com.fa.lib.SlippyTextStyle
 import com.fa.lib.SlippyTheme
 import com.fa.slippybottombar.ui.theme.SlippyBottomBarTheme
 
@@ -23,12 +28,16 @@ class MainActivity : ComponentActivity() {
         setContent {
             SlippyBottomBarTheme {
                 // A surface container using the 'background' color from the theme
-                Box(
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .background(color = Color.Black),
-                    contentAlignment = Alignment.BottomCenter
+                Column(
+                    modifier = Modifier.fillMaxSize(),
+                    verticalArrangement = Arrangement.SpaceBetween,
+                    horizontalAlignment = Alignment.CenterHorizontally
                 ) {
+                    Spacer(modifier = Modifier)
+                    Text(
+                        text = "Slippy bottom bar for the demonstration.",
+                        textAlign = TextAlign.Center
+                    )
                     SlippyDemonstration()
                 }
             }
@@ -49,13 +58,18 @@ fun SlippyDemonstration() {
     )
 
     SlippyBottomBar(
-        modifier = Modifier.background(color = Color.White),
-        theme = SlippyTheme.LINE,
-        bar = SlippyBar(
-            iconSize = R.dimen.iconSize,
-            disabledIconColor = R.color.disabledIconColor,
-            enabledIconColor = R.color.enableIconColor,
-            dividerColor = R.color.dividerColor
+        theme = SlippyTheme.LINE, bar = SlippyBar(
+            backgroundColor = R.color.white, textStyle = SlippyTextStyle(
+                textSize = R.dimen.textSize,
+                enabledTextColor = R.color.enabledTextColor,
+                disabledTextColor = R.color.disabledTextColor
+            ), iconStyle = SlippyIconStyle(
+                iconSize = R.dimen.iconSize,
+                disabledIconColor = R.color.disabledIconColor,
+                enabledIconColor = R.color.enabledIconColor, // When the round style is chosen, it should be white in color.
+            ), dividerStyle = SlippyDividerStyle(
+                dividerColor = R.color.dividerColor
+            )
         )
     )
 }

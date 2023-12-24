@@ -1,7 +1,7 @@
 package com.fa.lib
 
 enum class SlippyTheme {
-    NORMAL,
+    CLASSIC,
     LINE,
     ROUNDED
 }
