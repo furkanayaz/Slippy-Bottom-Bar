@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">SlippyBottomBar</string>
+    <string name="home">Home</string>
+    <string name="search">Search</string>
+    <string name="record">Record</string>
+    <string name="records">Records</string>
+    <string name="settings">Settings</string>
+</resources>

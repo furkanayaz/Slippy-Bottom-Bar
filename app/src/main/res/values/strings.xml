@@ -3,6 +3,6 @@
     <string name="home">Anasayfa</string>
     <string name="search">Ara</string>
     <string name="record">Kaydet</string>
-    <string name="bookmarks">Kayıtlar</string>
+    <string name="records">Kayıtlar</string>
     <string name="settings">Ayarlar</string>
 </resources>

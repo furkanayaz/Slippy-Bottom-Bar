@@ -8,7 +8,10 @@ data class SlippyTab(
 ) {
     companion object {
         internal val slippyTabs: MutableList<SlippyTab> = mutableListOf()
-        fun addTabs(tabs: List<SlippyTab>): Boolean = slippyTabs.addAll(tabs)
+        fun addTabs(tabs: List<SlippyTab>) {
+            slippyTabs.clear()
+            slippyTabs.addAll(tabs)
+        }
 
         internal fun getTabsSize(): Int = slippyTabs.size
     }
