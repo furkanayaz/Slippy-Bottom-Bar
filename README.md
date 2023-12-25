@@ -27,29 +27,34 @@ dependencies {
 **Step 4.** For example to use
 
 ```
-SlippyBottomBar(theme = SlippyTheme.LINE, bar = SlippyBar(
-        backgroundColor = R.color.white, textStyle = SlippyTextStyle(
-            textSize = R.dimen.textSize,
-            enabledTextColor = R.color.enabledTextColor,
-            disabledTextColor = R.color.disabledTextColor
-        ), iconStyle = SlippyIconStyle(
-            iconSize = R.dimen.iconSize,
-            disabledIconColor = R.color.disabledIconColor,
-            enabledIconColor = R.color.enabledIconColor, // When the round style is chosen, it should be white in color.
-        ), dividerStyle = SlippyDividerStyle(
-            dividerColor = R.color.dividerColor
+val tabs: List<SlippyTab> =
+        listOf(SlippyTab(name = R.string.home, icon = R.drawable.home, action = {
+            currentPage = getPage(context = context, id = R.string.home)
+        }), SlippyTab(name = R.string.search, icon = R.drawable.search, action = {
+            currentPage = getPage(context = context, id = R.string.search)
+        }), SlippyTab(name = R.string.record, icon = R.drawable.record, action = {
+            currentPage = getPage(context = context, id = R.string.record)
+        }), SlippyTab(name = R.string.records, icon = R.drawable.records, action = {
+            currentPage = getPage(context = context, id = R.string.records)
+        }), SlippyTab(name = R.string.settings, icon = R.drawable.settings, action = {
+            currentPage = getPage(context = context, id = R.string.settings)
+        })
         )
-    ), tabs = listOf(SlippyTab(name = R.string.home, icon = R.drawable.home, action = {
-        
-    }), SlippyTab(name = R.string.search, icon = R.drawable.search, action = {
-        
-    }), SlippyTab(name = R.string.record, icon = R.drawable.record, action = {
-        
-    }), SlippyTab(name = R.string.records, icon = R.drawable.records, action = {
-        
-    }), SlippyTab(name = R.string.settings, icon = R.drawable.settings, action = {
-        
-})))
+
+    SlippyBottomBar(
+        theme = SlippyTheme.LINE, bar = SlippyBar(
+            backgroundColor = R.color.white, textStyle = SlippyTextStyle(
+                textSize = R.dimen.textSize,
+                enabledTextColor = R.color.enabledTextColor,
+                disabledTextColor = R.color.disabledTextColor
+            ), iconStyle = SlippyIconStyle(
+                iconSize = R.dimen.iconSize,
+                disabledIconColor = R.color.disabledIconColor,
+                enabledIconColor = R.color.enabledIconColor, // When the round style is chosen, it should be white in color.
+            ), dividerStyle = SlippyDividerStyle(
+                dividerColor = R.color.dividerColor
+            )
+        ), tabs = tabs)
 ```
 
 25 Dec, 2023 - Furkan Ayaz
