@@ -55,42 +55,36 @@ fun SlippyDemonstration() {
         mutableStateOf(value = "Home")
     }
 
-    val tabs: List<SlippyTab> =
-        listOf(SlippyTab(name = R.string.home, icon = R.drawable.home, action = {
-            currentPage = getPage(context = context, id = R.string.home)
-        }), SlippyTab(name = R.string.search, icon = R.drawable.search, action = {
-            currentPage = getPage(context = context, id = R.string.search)
-        }), SlippyTab(name = R.string.record, icon = R.drawable.record, action = {
-            currentPage = getPage(context = context, id = R.string.record)
-        }), SlippyTab(name = R.string.records, icon = R.drawable.records, action = {
-            currentPage = getPage(context = context, id = R.string.records)
-        }), SlippyTab(name = R.string.settings, icon = R.drawable.settings, action = {
-            currentPage = getPage(context = context, id = R.string.settings)
-        })
-        )
-
-    SlippyTab.addTabs(tabs = tabs)
-
     Spacer(modifier = Modifier)
     Text(
         text = "Slippy bottom bar for the demonstration.\nYou are in $currentPage page.",
         textAlign = TextAlign.Center
     )
 
-    SlippyBottomBar(
-        theme = SlippyTheme.LINE, bar = SlippyBar(
-            backgroundColor = R.color.white, textStyle = SlippyTextStyle(
-                textSize = R.dimen.textSize,
-                enabledTextColor = R.color.enabledTextColor,
-                disabledTextColor = R.color.disabledTextColor
-            ), iconStyle = SlippyIconStyle(
-                iconSize = R.dimen.iconSize,
-                disabledIconColor = R.color.disabledIconColor,
-                enabledIconColor = R.color.enabledIconColor, // When the round style is chosen, it should be white in color.
-            ), dividerStyle = SlippyDividerStyle(
-                dividerColor = R.color.dividerColor
-            )
+    SlippyBottomBar(theme = SlippyTheme.LINE, bar = SlippyBar(
+        backgroundColor = R.color.white, textStyle = SlippyTextStyle(
+            textSize = R.dimen.textSize,
+            enabledTextColor = R.color.enabledTextColor,
+            disabledTextColor = R.color.disabledTextColor
+        ), iconStyle = SlippyIconStyle(
+            iconSize = R.dimen.iconSize,
+            disabledIconColor = R.color.disabledIconColor,
+            enabledIconColor = R.color.enabledIconColor, // When the round style is chosen, it should be white in color.
+        ), dividerStyle = SlippyDividerStyle(
+            dividerColor = R.color.dividerColor
         )
+    ), tabs = listOf(SlippyTab(name = R.string.home, icon = R.drawable.home, action = {
+        currentPage = getPage(context = context, id = R.string.home)
+    }), SlippyTab(name = R.string.search, icon = R.drawable.search, action = {
+        currentPage = getPage(context = context, id = R.string.search)
+    }), SlippyTab(name = R.string.record, icon = R.drawable.record, action = {
+        currentPage = getPage(context = context, id = R.string.record)
+    }), SlippyTab(name = R.string.records, icon = R.drawable.records, action = {
+        currentPage = getPage(context = context, id = R.string.records)
+    }), SlippyTab(name = R.string.settings, icon = R.drawable.settings, action = {
+        currentPage = getPage(context = context, id = R.string.settings)
+    })
+    )
     )
 }
 
