@@ -1,7 +1,7 @@
 # Slippy is a Bottom Bar Library on Android based Jetpack Compose!
 
 ## Slippy Bottom Bar Demonstrational 📽️
-<img width="300px" src="https://github.com/furkanayaz/Slippy-Bottom-Bar/assets/59910223/56b3e371-51f1-495a-b973-7341ab1117c2">
+<img width="300px" alt="Loading..." src="https://github.com/furkanayaz/Slippy-Bottom-Bar/assets/59910223/d2b03ada-ce90-4b0f-80c9-8cbc8d67718a">
 
 ### How To Install?
 
