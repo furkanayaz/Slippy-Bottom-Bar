@@ -24,7 +24,7 @@ dependencies {
 }
 ```
 
-***For example to use***
+**Step 4.** For example to use
 
 ```
 SlippyBottomBar(theme = SlippyTheme.LINE, bar = SlippyBar(
