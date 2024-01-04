@@ -34,6 +34,7 @@ import androidx.compose.ui.draw.drawWithCache
 import androidx.compose.ui.geometry.CornerRadius
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Size
+import androidx.compose.ui.geometry.center
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.onSizeChanged
 import androidx.compose.ui.res.colorResource
@@ -106,6 +107,7 @@ fun SlippyBottomBar(theme: SlippyTheme, bar: SlippyBar, tabs: List<SlippyTab>) {
     if (tabs.isEmpty()) throw SlippyTabsException()
 
     val divColor: Color = colorResource(id = bar.dividerStyle?.dividerColor ?: R.color.dividerColor)
+    val badgeColor: Color = colorResource(id = bar.badgeStyle?.backgroundColor ?: R.color.badgeBackgroundColor)
 
     val currentTab: MutableIntState = remember {
         mutableIntStateOf(value = 0)
@@ -140,7 +142,11 @@ fun SlippyBottomBar(theme: SlippyTheme, bar: SlippyBar, tabs: List<SlippyTab>) {
     )
 
     Row(modifier = Modifier
-        .background(color = colorResource(id = bar.backgroundColor))
+        .background(
+            color = colorResource(
+                id = bar.barStyle?.backgroundColor ?: R.color.barBackgroundColor
+            )
+        )
         .fillMaxWidth()
         .height(intrinsicSize = IntrinsicSize.Max)
         .onSizeChanged {
@@ -203,6 +209,23 @@ fun SlippyBottomBar(theme: SlippyTheme, bar: SlippyBar, tabs: List<SlippyTab>) {
                     if (currentTab.intValue != index) {
                         currentTab.intValue = index
                         page.action?.invoke()
+                    }
+                }
+                .drawWithCache {
+                    if (page.enableBadge) {
+                        val radius = 15.0F
+                        val position = Offset(
+                            x = (size.center.x * 2.0F - radius),
+                            y = -(size.center.y - radius - size.height / 2.0F)
+                        )
+
+                        onDrawBehind {
+                            drawCircle(
+                                color = badgeColor, radius = radius, center = position
+                            )
+                        }
+                    } else {
+                        this.onDrawBehind { /* NO-OP */ }
                     }
                 }
                 .padding(paddingValues = barPadding),

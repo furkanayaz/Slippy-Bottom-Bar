@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -21,7 +22,9 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.core.content.ContextCompat
+import com.fa.lib.SlippyBadgeStyle
 import com.fa.lib.SlippyBar
+import com.fa.lib.SlippyBarStyle
 import com.fa.lib.SlippyBottomBar
 import com.fa.lib.SlippyDividerStyle
 import com.fa.lib.SlippyIconStyle
@@ -55,6 +58,10 @@ fun SlippyDemonstration() {
         mutableStateOf(value = "Home")
     }
 
+    val badgeController: MutableState<Boolean> = remember {
+        mutableStateOf(value = true)
+    }
+
     Spacer(modifier = Modifier)
     Text(
         text = "Slippy bottom bar for the demonstration.\nYou are in $currentPage page.",
@@ -68,16 +75,20 @@ fun SlippyDemonstration() {
             currentPage = getPage(context = context, id = R.string.search)
         }), SlippyTab(name = R.string.record, icon = R.drawable.record, action = {
             currentPage = getPage(context = context, id = R.string.record)
-        }), SlippyTab(name = R.string.records, icon = R.drawable.records, action = {
-            currentPage = getPage(context = context, id = R.string.records)
-        }), SlippyTab(name = R.string.settings, icon = R.drawable.settings, action = {
+        }), SlippyTab(name = R.string.records,
+            icon = R.drawable.records,
+            enableBadge = badgeController.value,
+            action = {
+                currentPage = getPage(context = context, id = R.string.records)
+                badgeController.value = !badgeController.value
+            }), SlippyTab(name = R.string.settings, icon = R.drawable.settings, action = {
             currentPage = getPage(context = context, id = R.string.settings)
         })
         )
 
     SlippyBottomBar(
         theme = SlippyTheme.LINE, bar = SlippyBar(
-            backgroundColor = R.color.white, textStyle = SlippyTextStyle(
+            barStyle = SlippyBarStyle(backgroundColor = R.color.white), textStyle = SlippyTextStyle(
                 textSize = R.dimen.textSize,
                 enabledTextColor = R.color.enabledTextColor,
                 disabledTextColor = R.color.disabledTextColor
@@ -87,6 +98,9 @@ fun SlippyDemonstration() {
                 enabledIconColor = R.color.enabledIconColor, // When the round style is chosen, it should be white in color.
             ), dividerStyle = SlippyDividerStyle(
                 dividerColor = R.color.dividerColor
+            ),
+            badgeStyle = SlippyBadgeStyle(
+                backgroundColor = R.color.red
             )
         ), tabs = tabs
     )

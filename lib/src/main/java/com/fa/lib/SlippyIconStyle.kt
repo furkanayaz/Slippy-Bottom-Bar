@@ -6,5 +6,5 @@ import androidx.annotation.DimenRes
 data class SlippyIconStyle(
     @DimenRes val iconSize: Int,
     @ColorRes val disabledIconColor: Int,
-    @ColorRes val enabledIconColor: Int,
+    @ColorRes val enabledIconColor: Int
 )

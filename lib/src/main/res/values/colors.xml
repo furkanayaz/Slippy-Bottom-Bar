@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="toolTipTextBackground">#5A5A5A</color>
+    <color name="barBackgroundColor">#FFFFFFFF</color>
+    <color name="toolTipTextBackground">#FF5A5A5A</color>
     <color name="toolTipTextColor">#FFFFFFFF</color>
     <color name="enabledTextColor">#FF3C3C3C</color>
-    <color name="disabledTextColor">#B9BCBE</color>
-    <color name="disabledIconColor">#B9BCBE</color>
-    <color name="enabledIconColor">#2196F3</color>
-    <color name="dividerColor">#2196F3</color>
+    <color name="disabledTextColor">#FFB9BCBE</color>
+    <color name="disabledIconColor">#FFB9BCBE</color>
+    <color name="enabledIconColor">#FF2196F3</color>
+    <color name="dividerColor">#FF2196F3</color>
+    <color name="badgeBackgroundColor">#FFFF0000</color>
 </resources>
