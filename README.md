@@ -2,6 +2,7 @@
 
 ## Slippy Bottom Bar Demonstrational 📽️
 <img width="300px" alt="Loading..." src="https://github.com/furkanayaz/Slippy-Bottom-Bar/assets/59910223/d2b03ada-ce90-4b0f-80c9-8cbc8d67718a">
+<img alt="With Badges" src="https://github.com/furkanayaz/Slippy-Bottom-Bar/assets/59910223/8b52a93c-ecd8-4f75-9068-a14000b649c6">
 
 ### How To Install?
 
