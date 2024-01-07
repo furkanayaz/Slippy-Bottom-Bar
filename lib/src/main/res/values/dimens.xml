@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="toolTipPadding">5dp</dimen>
-    <dimen name="textSize">12sp</dimen>
+    <dimen name="tabTextSize">12sp</dimen>
+    <dimen name="tabIconSize">20dp</dimen>
     <dimen name="badgeTextSize">10sp</dimen>
-    <dimen name="iconSize">20dp</dimen>
 </resources>

@@ -1,8 +1,11 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">SlippyBottomBar</string>
     <string name="home">Home</string>
     <string name="search">Search</string>
     <string name="record">Record</string>
     <string name="records">Records</string>
     <string name="settings">Settings</string>
+    <string name="page_desc" tools:ignore="Typos">Slippy bottom bar for the demonstration. You are in %1$s page.</string>
+    <string name="click_increase">Click and Increase</string>
+    <string name="click_hide">Change Visibility</string>
 </resources>

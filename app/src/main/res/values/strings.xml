@@ -1,8 +1,11 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">SlippyBottomBar</string>
     <string name="home">Anasayfa</string>
     <string name="search">Ara</string>
     <string name="record">Kaydet</string>
     <string name="records">Kayıtlar</string>
     <string name="settings">Ayarlar</string>
+    <string name="page_desc" tools:ignore="Typos">Gösteri amaçlı Slippy Bottom Bar. Şu anda %1$s sayfasındasın.</string>
+    <string name="click_increase">Tıkla ve Arttır</string>
+    <string name="click_hide">Görünürlüğü Değiştir</string>
 </resources>

@@ -8,6 +8,7 @@ import androidx.compose.animation.core.spring
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.IntrinsicSize
@@ -18,6 +19,8 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.material3.Badge
+import androidx.compose.material3.BadgedBox
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -34,7 +37,6 @@ import androidx.compose.ui.draw.drawWithCache
 import androidx.compose.ui.geometry.CornerRadius
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Size
-import androidx.compose.ui.geometry.center
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.onSizeChanged
 import androidx.compose.ui.res.colorResource
@@ -42,6 +44,7 @@ import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.IntSize
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.TextUnitType
@@ -49,7 +52,7 @@ import androidx.compose.ui.unit.dp
 import com.fa.slippybottombar.R
 
 /**
- * @since Dec 25, 2023
+ * @since Jan 7, 2024
  * @author Furkan Ayaz
  *
  * @param [theme]
@@ -107,7 +110,6 @@ fun SlippyBottomBar(theme: SlippyTheme, bar: SlippyBar, tabs: List<SlippyTab>) {
     if (tabs.isEmpty()) throw SlippyTabsException()
 
     val divColor: Color = colorResource(id = bar.dividerStyle?.dividerColor ?: R.color.dividerColor)
-    val badgeColor: Color = colorResource(id = bar.badgeStyle?.backgroundColor ?: R.color.badgeBackgroundColor)
 
     val currentTab: MutableIntState = remember {
         mutableIntStateOf(value = 0)
@@ -205,43 +207,37 @@ fun SlippyBottomBar(theme: SlippyTheme, bar: SlippyBar, tabs: List<SlippyTab>) {
             Column(modifier = Modifier
                 .fillMaxHeight()
                 .weight(weight = 1.0F, fill = true)
-                .clickable {
+                .clickable(interactionSource = MutableInteractionSource(), indication = null) {
                     if (currentTab.intValue != index) {
                         currentTab.intValue = index
                         page.action?.invoke()
                     }
                 }
-                .drawWithCache {
-                    if (page.enableBadge) {
-                        val radius = 15.0F
-                        val position = Offset(
-                            x = (size.center.x * 2.0F - radius),
-                            y = -(size.center.y - radius - size.height / 2.0F)
-                        )
-
-                        onDrawBehind {
-                            drawCircle(
-                                color = badgeColor, radius = radius, center = position
-                            )
-                        }
-                    } else {
-                        this.onDrawBehind { /* NO-OP */ }
-                    }
-                }
                 .padding(paddingValues = barPadding),
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.SpaceAround) {
-                Icon(
-                    modifier = Modifier.size(
-                        size = dimensionResource(
-                            id = bar.iconStyle?.iconSize ?: R.dimen.iconSize
+
+                if (page.enableBadge) BadgedBox(badge = {
+                    Badge(containerColor = colorResource(
+                        id = bar.badgeStyle?.backgroundColor ?: R.color.badgeBackgroundColor
+                    ), contentColor = colorResource(
+                        id = bar.badgeStyle?.contentColor ?: R.color.badgeContentColor
+                    ), content = {
+                        Text(
+                            text = page.badgeCount.toString(), fontSize = TextUnit(
+                                value = dimensionResource(
+                                    id = R.dimen.badgeTextSize
+                                ).value, type = TextUnitType.Sp
+                            )
                         )
-                    ),
-                    tint = animateIconColor,
-                    painter = painterResource(id = page.icon),
-                    contentDescription = stringResource(
-                        id = page.name
+                    })
+                }) {
+                    GetTabIcon(
+                        animateIconColor = animateIconColor, page = page
                     )
+                }
+                else GetTabIcon(
+                    animateIconColor = animateIconColor, page = page
                 )
 
                 if (theme == SlippyTheme.CLASSIC) {
@@ -258,13 +254,13 @@ fun SlippyBottomBar(theme: SlippyTheme, bar: SlippyBar, tabs: List<SlippyTab>) {
                     Text(
                         modifier = Modifier.padding(top = 4.dp),
                         text = stringResource(id = page.name),
-                        maxLines = bar.textStyle?.maxLines ?: 1,
-                        textAlign = bar.textStyle?.textAlign,
+                        maxLines = 1,
+                        textAlign = TextAlign.Center,
                         fontWeight = FontWeight.SemiBold,
                         color = animateTextColor,
                         fontSize = TextUnit(
                             value = dimensionResource(
-                                id = bar.textStyle?.textSize ?: R.dimen.textSize
+                                id = R.dimen.tabTextSize
                             ).value, type = TextUnitType.Sp
                         )
                     )
@@ -273,5 +269,20 @@ fun SlippyBottomBar(theme: SlippyTheme, bar: SlippyBar, tabs: List<SlippyTab>) {
 
         }
     }
+}
 
+@Composable
+internal fun GetTabIcon(animateIconColor: Color, page: SlippyTab) {
+    Icon(
+        modifier = Modifier.size(
+            size = dimensionResource(
+                id = R.dimen.tabIconSize
+            )
+        ),
+        tint = animateIconColor,
+        painter = painterResource(id = page.icon),
+        contentDescription = stringResource(
+            id = page.name
+        )
+    )
 }

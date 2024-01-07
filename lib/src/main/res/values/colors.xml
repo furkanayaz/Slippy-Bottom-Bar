@@ -9,4 +9,5 @@
     <color name="enabledIconColor">#FF2196F3</color>
     <color name="dividerColor">#FF2196F3</color>
     <color name="badgeBackgroundColor">#FFFF0000</color>
+    <color name="badgeContentColor">#FFFFFFFF</color>
 </resources>
