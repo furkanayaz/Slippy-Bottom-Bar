@@ -24,7 +24,7 @@ dependencyResolutionManagement {
 
 ```
 dependencies {
-	implementation("com.github.furkanayaz:Slippy-Bottom-Bar:1.8")
+	implementation("com.github.furkanayaz:Slippy-Bottom-Bar:1.9")
 }
 ```
 
