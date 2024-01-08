@@ -52,7 +52,7 @@ import androidx.compose.ui.unit.dp
 import com.fa.slippybottombar.R
 
 /**
- * @since Jan 7, 2024
+ * @since Jan 8, 2024
  * @author Furkan Ayaz
  *
  * @param [theme]

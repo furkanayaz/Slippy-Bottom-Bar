@@ -61,4 +61,4 @@ val tabs: List<SlippyTab> =
         ), tabs = tabs)
 ```
 
-25 Dec, 2023 - Furkan Ayaz
+8 Jan, 2024 - Furkan Ayaz
