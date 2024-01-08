@@ -54,7 +54,7 @@ publishing {
         register<MavenPublication>("release") {
             groupId = "com.github.furkanayaz"
             artifactId = "slippy-bottom-bar"
-            version = "1.8"
+            version = "2.0"
 
             afterEvaluate {
                 from(components["release"])
