@@ -58,7 +58,7 @@ val tabs: List<SlippyTab> =
             ), dividerStyle = SlippyDividerStyle(
                 dividerColor = R.color.dividerColor
             )
-        ), tabs = tabs)
+        ), tabs = tabs, startIndex = 2)
 ```
 
 13 Jan, 2024 - Furkan Ayaz
