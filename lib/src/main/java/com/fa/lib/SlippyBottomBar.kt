@@ -114,7 +114,7 @@ fun SlippyBottomBar(
 ) {
     if (tabs.isEmpty()) throw SlippyTabsException(message = tabsEmptyMessage)
 
-    if (startIndex > tabs.size) throw SlippyTabsException(message = startIndexGreaterMessage)
+    if (startIndex > tabs.lastIndex) throw SlippyTabsException(message = startIndexGreaterMessage)
 
     val divColor: Color = colorResource(id = bar.dividerStyle?.dividerColor ?: R.color.dividerColor)
 
