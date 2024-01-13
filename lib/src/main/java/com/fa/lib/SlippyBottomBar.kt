@@ -52,7 +52,7 @@ import androidx.compose.ui.unit.dp
 import com.fa.slippybottombar.R
 
 /**
- * @since Jan 7, 2024
+ * @since Jan 13, 2024
  * @author Furkan Ayaz
  *
  * @param [theme]
@@ -66,6 +66,9 @@ import com.fa.slippybottombar.R
  * @param [tabs]
  * The purpose of requesting Slippy Tabs is to enable the pages you need to create to display
  * the bottom bar view you will create to your users.
+ *
+ * @param [startIndex]
+ * The purpose of requesting startIndex is to determine the first page opened.
  *
  * @exception [tabs] To use Slippy-Bottom-Bar, the slippy-tab type list you provide as a parameter must not be empty.
  *
@@ -106,13 +109,17 @@ import com.fa.slippybottombar.R
 
 @Throws(exceptionClasses = [SlippyTabsException::class])
 @Composable
-fun SlippyBottomBar(theme: SlippyTheme, bar: SlippyBar, tabs: List<SlippyTab>) {
-    if (tabs.isEmpty()) throw SlippyTabsException()
+fun SlippyBottomBar(
+    theme: SlippyTheme, bar: SlippyBar, tabs: List<SlippyTab>, startIndex: Int = 0
+) {
+    if (tabs.isEmpty()) throw SlippyTabsException(message = tabsEmptyMessage)
+
+    if (startIndex > tabs.size) throw SlippyTabsException(message = startIndexGreaterMessage)
 
     val divColor: Color = colorResource(id = bar.dividerStyle?.dividerColor ?: R.color.dividerColor)
 
     val currentTab: MutableIntState = remember {
-        mutableIntStateOf(value = 0)
+        mutableIntStateOf(value = startIndex)
     }
 
     val barSize: MutableState<IntSize> = remember {

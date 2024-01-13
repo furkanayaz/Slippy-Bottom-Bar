@@ -57,7 +57,7 @@ class MainActivity : ComponentActivity() {
 fun SlippyDemonstration(isEnable: Boolean) {
     val context: Context = LocalContext.current
     var currentPage: String by remember {
-        mutableStateOf(value = "Home")
+        mutableStateOf(value = context.getString(R.string.record))
     }
 
     val badgeCounter: MutableState<Int> = remember {
@@ -106,7 +106,7 @@ fun SlippyDemonstration(isEnable: Boolean) {
                 backgroundColor = R.color.red,
                 contentColor = R.color.white
             )
-        ), tabs = tabs
+        ), tabs = tabs, startIndex = 2
     )
 }
 
