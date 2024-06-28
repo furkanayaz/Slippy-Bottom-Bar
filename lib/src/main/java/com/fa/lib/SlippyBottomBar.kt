@@ -27,6 +27,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableIntState
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.State
+import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
@@ -126,26 +127,36 @@ fun SlippyBottomBar(
         mutableStateOf(value = IntSize.Zero)
     }
 
-    val barPadding = PaddingValues(
-        top = when (theme) {
-            SlippyTheme.CLASSIC -> 6.4.dp
-            SlippyTheme.LINE -> 18.dp
-            SlippyTheme.ROUNDED -> 18.dp
-        }, bottom = when (theme) {
-            SlippyTheme.CLASSIC -> 0.dp
-            SlippyTheme.LINE -> 18.dp
-            SlippyTheme.ROUNDED -> 18.dp
+    val barPadding = remember {
+        PaddingValues(
+            top = when (theme) {
+                SlippyTheme.CLASSIC -> 6.4.dp
+                SlippyTheme.LINE -> 18.dp
+                SlippyTheme.ROUNDED -> 18.dp
+            }, bottom = when (theme) {
+                SlippyTheme.CLASSIC -> 0.dp
+                SlippyTheme.LINE -> 18.dp
+                SlippyTheme.ROUNDED -> 18.dp
+            }
+        )
+    }
+
+    val endOffset = remember(barSize.value) {
+        derivedStateOf {
+            Offset(
+                x = ((barSize.value.width / tabs.size) * (currentTab.intValue + 1)).toFloat(), y = 0f
+            )
         }
-    )
+    }
 
-    val endOffset = Offset(
-        x = ((barSize.value.width / tabs.size) * (currentTab.intValue + 1)).toFloat(), y = 0f
-    )
-
-    val startOffset = Offset(x = endOffset.x - (barSize.value.width / tabs.size), y = 0f)
+    val startOffset = remember(barSize.value) {
+        derivedStateOf {
+            Offset(x = endOffset.value.x - (barSize.value.width / tabs.size), y = 0f)
+        }
+    }
 
     val animateStartOffset: State<Offset> = animateOffsetAsState(
-        targetValue = startOffset, animationSpec = spring(
+        targetValue = startOffset.value, animationSpec = spring(
             dampingRatio = Spring.DampingRatioMediumBouncy, stiffness = Spring.StiffnessMediumLow
         ), label = ""
     )
