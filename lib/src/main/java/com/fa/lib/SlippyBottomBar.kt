@@ -32,6 +32,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.drawWithCache
@@ -53,7 +54,7 @@ import androidx.compose.ui.unit.dp
 import com.fa.slippybottombar.R
 
 /**
- * @since Jan 13, 2024
+ * @since Jun 29, 2024
  * @author Furkan Ayaz
  *
  * @param [theme]
@@ -67,9 +68,6 @@ import com.fa.slippybottombar.R
  * @param [tabs]
  * The purpose of requesting Slippy Tabs is to enable the pages you need to create to display
  * the bottom bar view you will create to your users.
- *
- * @param [startIndex]
- * The purpose of requesting startIndex is to determine the first page opened.
  *
  * @exception [tabs] To use Slippy-Bottom-Bar, the slippy-tab type list you provide as a parameter must not be empty.
  *
@@ -104,23 +102,23 @@ import com.fa.slippybottombar.R
  *                 enabledIconColor = R.color.enabledIconColor, // When the round style is chosen, it should be white in color.
  *             ), dividerStyle = SlippyDividerStyle(
  *                 dividerColor = R.color.dividerColor
- *             )
+ *             ), startIndex = 2
  *         ), tabs = tabs)
  * */
 
 @Throws(exceptionClasses = [SlippyTabsException::class])
 @Composable
 fun SlippyBottomBar(
-    theme: SlippyTheme, bar: SlippyBar, tabs: List<SlippyTab>, startIndex: Int = 0
+    theme: SlippyTheme, bar: SlippyBar, tabs: List<SlippyTab>
 ) {
-    if (tabs.isEmpty()) throw SlippyTabsException(message = tabsEmptyMessage)
+    if (tabs.isEmpty()) throw SlippyTabsException(message = ExceptionMessage.TABS_EMPTY_MESSAGE.message)
 
-    if (startIndex > tabs.lastIndex) throw SlippyTabsException(message = startIndexGreaterMessage)
+    if (bar.startIndex > tabs.lastIndex) throw SlippyTabsException(message = ExceptionMessage.START_INDEX_GREATER_MESSAGE.message)
 
     val divColor: Color = colorResource(id = bar.dividerStyle?.dividerColor ?: R.color.dividerColor)
 
-    val currentTab: MutableIntState = remember {
-        mutableIntStateOf(value = startIndex)
+    val currentTab: MutableIntState = rememberSaveable {
+        mutableIntStateOf(value = bar.startIndex)
     }
 
     val barSize: MutableState<IntSize> = remember {
@@ -144,7 +142,8 @@ fun SlippyBottomBar(
     val endOffset = remember(barSize.value) {
         derivedStateOf {
             Offset(
-                x = ((barSize.value.width / tabs.size) * (currentTab.intValue + 1)).toFloat(), y = 0f
+                x = ((barSize.value.width / tabs.size) * (currentTab.intValue + 1)).toFloat(),
+                y = 0f
             )
         }
     }

@@ -14,6 +14,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -61,7 +62,7 @@ fun SlippyDemonstration(isEnable: Boolean) {
     }
 
     val badgeCounter: MutableState<Int> = remember {
-        mutableStateOf(value = 0)
+        mutableIntStateOf(value = 0)
     }
 
     val badgeVisibility: MutableState<Boolean> = remember {
@@ -103,10 +104,9 @@ fun SlippyDemonstration(isEnable: Boolean) {
             ), dividerStyle = SlippyDividerStyle(
                 dividerColor = R.color.dividerColor
             ), badgeStyle = SlippyBadgeStyle(
-                backgroundColor = R.color.red,
-                contentColor = R.color.white
-            )
-        ), tabs = tabs, startIndex = 2
+                backgroundColor = R.color.red, contentColor = R.color.white
+            ), startIndex = 2
+        ), tabs = tabs
     )
 }
 
@@ -120,8 +120,7 @@ fun SlippyCommands(page: String, counter: MutableState<Int>, visibility: Mutable
         horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.Center
     ) {
         Text(
-            text = context.getString(R.string.page_desc, page),
-            textAlign = TextAlign.Center
+            text = context.getString(R.string.page_desc, page), textAlign = TextAlign.Center
         )
 
         Button(onClick = {

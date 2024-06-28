@@ -24,7 +24,7 @@ dependencyResolutionManagement {
 
 ```
 dependencies {
-	implementation("com.github.furkanayaz:Slippy-Bottom-Bar:2.3")
+	implementation("com.github.furkanayaz:Slippy-Bottom-Bar:2.5")
 }
 ```
 
@@ -57,8 +57,8 @@ val tabs: List<SlippyTab> =
                 enabledIconColor = R.color.enabledIconColor, // When the round style is chosen, it should be white in color.
             ), dividerStyle = SlippyDividerStyle(
                 dividerColor = R.color.dividerColor
-            )
-        ), tabs = tabs, startIndex = 2)
+            ), startIndex = 2
+        ), tabs = tabs)
 ```
 
-13 Jan, 2024 - Furkan Ayaz
+29 Jun, 2024 - Furkan Ayaz

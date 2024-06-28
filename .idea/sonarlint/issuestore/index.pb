@@ -9,5 +9,23 @@ h
 8app/src/main/java/com/fa/slippybottombar/MainActivity.kt,4\2\4247ea7136e92afafbc27c5504e28fec96c72108
 c
 3lib/src/main/java/com/fa/lib/SlippyTabsException.kt,f\5\f5e9615b9cd30e07df3396cdeaa29e6dc4669871
+[
++lib/src/main/java/com/fa/lib/SlippyTheme.kt,c\2\c22c5e784288aae0af9a63153faf642a70e34f52
+D
+app/build.gradle.kts,d\2\d2a4383452aad84a18429a5844d31330a012a9e6
+D
+lib/build.gradle.kts,e\8\e833d5b57ccb63cb2f1f8a0d0e773ede158fc8d1
+_
+/lib/src/main/java/com/fa/lib/SlippyTextStyle.kt,b\5\b53e675a5ff995dc1dd287f50ad68273083c3452
+_
+/lib/src/main/java/com/fa/lib/SlippyIconStyle.kt,f\f\ff8634c9d0fad1a1fc4736b645a303ad566a94c5
+b
+2lib/src/main/java/com/fa/lib/SlippyDividerStyle.kt,b\c\bca4c691ceed69dfa746ece2a4d4fd71696ad8a3
+^
+.lib/src/main/java/com/fa/lib/SlippyBarStyle.kt,e\4\e49c16a90dd35d05e7c863d8f5a26eede8d0e425
 `
-0app/src/main/java/com/fa/slippybottombar/Test.kt,0\3\030f033c1d14434994d544e8ada17508d77579fc
+0lib/src/main/java/com/fa/lib/SlippyBadgeStyle.kt,6\9\693a5e8d566cdd4265defba676c164cf30a66a1d
+9
+	README.md,8\e\8ec9a00bfd09b3190ac6b22251dbb1aa95a0579d
+P
+ app/src/main/AndroidManifest.xml,8\c\8c55c3ccc257e5907959013f99656e4c8ec3903e

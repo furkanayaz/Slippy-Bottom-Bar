@@ -44,9 +44,9 @@ android {
 }
 
 dependencies {
-    implementation("androidx.core:core-ktx:1.12.0")
+    implementation("androidx.core:core-ktx:1.13.1")
     implementation("androidx.compose.ui:ui")
-    implementation("androidx.compose.material3:material3:1.2.0-beta01")
+    implementation("androidx.compose.material3:material3:1.2.1")
 }
 
 publishing {
@@ -54,7 +54,7 @@ publishing {
         register<MavenPublication>("release") {
             groupId = "com.github.furkanayaz"
             artifactId = "slippy-bottom-bar"
-            version = "2.3"
+            version = "2.5"
 
             afterEvaluate {
                 from(components["release"])

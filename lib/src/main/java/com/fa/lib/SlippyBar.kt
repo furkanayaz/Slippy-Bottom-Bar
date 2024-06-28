@@ -6,5 +6,6 @@ data class SlippyBar(
     val iconStyle: SlippyIconStyle? = null,
     val dividerStyle: SlippyDividerStyle? = null,
     val badgeStyle: SlippyBadgeStyle? = null,
+    val startIndex: Int = 0,
     val animationMillis: Int = 250
 )
