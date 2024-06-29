@@ -8,4 +8,8 @@ data class SlippyBar(
     val badgeStyle: SlippyBadgeStyle? = null,
     val startIndex: Int = 0,
     val animationMillis: Int = 250
-)
+) {
+    init {
+        SlippyOptions.CURRENT_PAGE = startIndex
+    }
+}

@@ -113,12 +113,12 @@ fun SlippyBottomBar(
 ) {
     if (tabs.isEmpty()) throw SlippyTabsException(message = ExceptionMessage.TABS_EMPTY_MESSAGE.message)
 
-    if (bar.startIndex > tabs.lastIndex) throw SlippyTabsException(message = ExceptionMessage.START_INDEX_GREATER_MESSAGE.message)
+    if (SlippyOptions.CURRENT_PAGE > tabs.lastIndex) throw SlippyTabsException(message = ExceptionMessage.START_INDEX_GREATER_MESSAGE.message)
 
     val divColor: Color = colorResource(id = bar.dividerStyle?.dividerColor ?: R.color.dividerColor)
 
     val currentTab: MutableIntState = rememberSaveable {
-        mutableIntStateOf(value = bar.startIndex)
+        mutableIntStateOf(value = SlippyOptions.CURRENT_PAGE)
     }
 
     val barSize: MutableState<IntSize> = remember {

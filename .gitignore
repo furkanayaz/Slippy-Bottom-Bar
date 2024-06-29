@@ -1,6 +1,7 @@
 *.iml
 .gradle
 /local.properties
+/.idea
 /.idea/caches
 /.idea/libraries
 /.idea/modules.xml
@@ -13,3 +14,14 @@
 .externalNativeBuild
 .cxx
 local.properties
+/.gradle
+/proguard-rules.pro
+*.apk
+*.aar
+*.ap_
+.classpath
+.project
+*.log
+*.pot
+*.dat
+*.tmp
