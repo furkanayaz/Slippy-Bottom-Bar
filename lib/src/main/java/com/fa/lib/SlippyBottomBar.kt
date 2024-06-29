@@ -24,12 +24,10 @@ import androidx.compose.material3.BadgedBox
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.MutableIntState
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.State
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
@@ -50,6 +48,7 @@ import androidx.compose.ui.unit.IntSize
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.TextUnitType
 import androidx.compose.ui.unit.dp
+import com.fa.lib.SlippyOptions.currentPage
 import com.fa.slippybottombar.R
 
 /**
@@ -112,13 +111,9 @@ fun SlippyBottomBar(
 ) {
     if (tabs.isEmpty()) throw SlippyTabsException(message = ExceptionMessage.TABS_EMPTY_MESSAGE.message)
 
-    if (SlippyOptions.CURRENT_PAGE > tabs.lastIndex) throw SlippyTabsException(message = ExceptionMessage.START_INDEX_GREATER_MESSAGE.message)
+    if (currentPage.value!! > tabs.lastIndex) throw SlippyTabsException(message = ExceptionMessage.START_INDEX_GREATER_MESSAGE.message)
 
     val divColor: Color = colorResource(id = bar.dividerStyle?.dividerColor ?: R.color.dividerColor)
-
-    val currentTab: MutableIntState = remember {
-        mutableIntStateOf(value = SlippyOptions.CURRENT_PAGE)
-    }
 
     val barSize: MutableState<IntSize> = remember {
         mutableStateOf(value = IntSize.Zero)
@@ -141,7 +136,7 @@ fun SlippyBottomBar(
     val endOffset = remember(barSize.value) {
         derivedStateOf {
             Offset(
-                x = ((barSize.value.width / tabs.size) * (currentTab.intValue + 1)).toFloat(),
+                x = ((barSize.value.width / tabs.size) * (currentPage.value!! + 1)).toFloat(),
                 y = 0f
             )
         }
@@ -214,7 +209,7 @@ fun SlippyBottomBar(
                 animationSpec = tween(
                     durationMillis = bar.animationMillis, easing = FastOutLinearInEasing
                 ), targetValue = colorResource(
-                    id = if (currentTab.intValue == index) bar.iconStyle?.enabledIconColor
+                    id = if (currentPage.value == index) bar.iconStyle?.enabledIconColor
                         ?: R.color.enabledIconColor else bar.iconStyle?.disabledIconColor
                         ?: R.color.disabledIconColor
                 ), label = ""
@@ -224,8 +219,8 @@ fun SlippyBottomBar(
                 .fillMaxHeight()
                 .weight(weight = 1.0F, fill = true)
                 .clickable(interactionSource = MutableInteractionSource(), indication = null) {
-                    if (currentTab.intValue != index) {
-                        currentTab.intValue = index
+                    if (currentPage.value != index) {
+                        currentPage.value = index
                         page.action?.invoke()
                     }
                 }
@@ -261,7 +256,7 @@ fun SlippyBottomBar(
                         animationSpec = tween(
                             durationMillis = bar.animationMillis, easing = FastOutLinearInEasing
                         ), targetValue = colorResource(
-                            id = if (currentTab.intValue == index) bar.textStyle?.enabledTextColor
+                            id = if (currentPage.value == index) bar.textStyle?.enabledTextColor
                                 ?: R.color.enabledTextColor else bar.textStyle?.disabledTextColor
                                 ?: R.color.disabledTextColor
                         ), label = ""

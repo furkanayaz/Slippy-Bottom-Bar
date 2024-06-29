@@ -1,5 +1,7 @@
 package com.fa.lib
 
+import androidx.compose.runtime.mutableStateOf
+
 object SlippyOptions {
-    var CURRENT_PAGE = 0
+    var currentPage = mutableStateOf<Int?>(null)
 }

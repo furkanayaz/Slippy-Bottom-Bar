@@ -1,5 +1,7 @@
 package com.fa.lib
 
+import com.fa.lib.SlippyOptions.currentPage
+
 data class SlippyBar(
     val barStyle: SlippyBarStyle? = null,
     val textStyle: SlippyTextStyle? = null,
@@ -10,6 +12,8 @@ data class SlippyBar(
     val animationMillis: Int = 250
 ) {
     init {
-        SlippyOptions.CURRENT_PAGE = startIndex
+        if (currentPage.value == null) {
+            currentPage.value = startIndex
+        }
     }
 }
