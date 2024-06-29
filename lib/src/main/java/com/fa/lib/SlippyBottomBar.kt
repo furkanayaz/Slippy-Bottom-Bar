@@ -32,7 +32,6 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.drawWithCache
@@ -117,7 +116,7 @@ fun SlippyBottomBar(
 
     val divColor: Color = colorResource(id = bar.dividerStyle?.dividerColor ?: R.color.dividerColor)
 
-    val currentTab: MutableIntState = rememberSaveable {
+    val currentTab: MutableIntState = remember {
         mutableIntStateOf(value = SlippyOptions.CURRENT_PAGE)
     }
 
