@@ -52,7 +52,7 @@ import com.fa.lib.SlippyOptions.currentPage
 import com.fa.slippybottombar.R
 
 /**
- * @since Jun 29, 2024
+ * @since Aug 28, 2024
  * @author Furkan Ayaz
  *
  * @param [theme]
@@ -154,6 +154,18 @@ fun SlippyBottomBar(
         ), label = ""
     )
 
+    val animateIconColor: @Composable (Int) -> State<Color> = { index ->
+        animateColorAsState(
+            animationSpec = tween(
+                durationMillis = bar.animationMillis, easing = FastOutLinearInEasing
+            ), targetValue = colorResource(
+                id = if (currentPage.value == index) bar.iconStyle?.enabledIconColor
+                    ?: R.color.enabledIconColor else bar.iconStyle?.disabledIconColor
+                    ?: R.color.disabledIconColor
+            ), label = ""
+        )
+    }
+
     Row(modifier = Modifier
         .background(
             color = colorResource(
@@ -205,16 +217,6 @@ fun SlippyBottomBar(
         verticalAlignment = Alignment.CenterVertically
     ) {
         tabs.forEachIndexed { index: Int, page: SlippyTab ->
-            val animateIconColor: Color by animateColorAsState(
-                animationSpec = tween(
-                    durationMillis = bar.animationMillis, easing = FastOutLinearInEasing
-                ), targetValue = colorResource(
-                    id = if (currentPage.value == index) bar.iconStyle?.enabledIconColor
-                        ?: R.color.enabledIconColor else bar.iconStyle?.disabledIconColor
-                        ?: R.color.disabledIconColor
-                ), label = ""
-            )
-
             Column(modifier = Modifier
                 .fillMaxHeight()
                 .weight(weight = 1.0F, fill = true)
@@ -244,11 +246,11 @@ fun SlippyBottomBar(
                     })
                 }) {
                     GetTabIcon(
-                        animateIconColor = animateIconColor, page = page
+                        animateIconColor = animateIconColor.invoke(index).value, page = page
                     )
                 }
                 else GetTabIcon(
-                    animateIconColor = animateIconColor, page = page
+                    animateIconColor = animateIconColor.invoke(index).value, page = page
                 )
 
                 if (theme == SlippyTheme.CLASSIC) {

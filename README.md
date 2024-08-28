@@ -24,7 +24,7 @@ dependencyResolutionManagement {
 
 ```
 dependencies {
-	implementation("com.github.furkanayaz:Slippy-Bottom-Bar:2.6")
+	implementation("com.github.furkanayaz:Slippy-Bottom-Bar:2.9")
 }
 ```
 
@@ -61,4 +61,4 @@ val tabs: List<SlippyTab> =
         ), tabs = tabs)
 ```
 
-29 Jun, 2024 - Furkan Ayaz
+28 Aug, 2024 - Furkan Ayaz
