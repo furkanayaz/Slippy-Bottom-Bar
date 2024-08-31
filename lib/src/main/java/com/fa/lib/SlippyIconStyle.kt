@@ -1,8 +1,9 @@
 package com.fa.lib
 
-import androidx.annotation.ColorRes
+import androidx.annotation.ColorInt
+import androidx.compose.ui.graphics.Color
 
 data class SlippyIconStyle(
-    @ColorRes val disabledIconColor: Int,
-    @ColorRes val enabledIconColor: Int
+    @ColorInt val disabledIconColor: Color,
+    @ColorInt val enabledIconColor: Color
 )

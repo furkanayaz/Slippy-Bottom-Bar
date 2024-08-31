@@ -1,8 +1,9 @@
 package com.fa.lib
 
-import androidx.annotation.ColorRes
+import androidx.annotation.ColorInt
+import androidx.compose.ui.graphics.Color
 
 data class SlippyTextStyle(
-    @ColorRes val enabledTextColor: Int? = null,
-    @ColorRes val disabledTextColor: Int? = null
+    @ColorInt val enabledTextColor: Color,
+    @ColorInt val disabledTextColor: Color
 )

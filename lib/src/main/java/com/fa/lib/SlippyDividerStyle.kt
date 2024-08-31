@@ -1,7 +1,8 @@
 package com.fa.lib
 
-import androidx.annotation.ColorRes
+import androidx.annotation.ColorInt
+import androidx.compose.ui.graphics.Color
 
 data class SlippyDividerStyle(
-    @ColorRes val dividerColor: Int? = null,
+    @ColorInt val dividerColor: Color
 )

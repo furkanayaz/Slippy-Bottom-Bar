@@ -1,8 +1,9 @@
 package com.fa.lib
 
-import androidx.annotation.ColorRes
+import androidx.annotation.ColorInt
+import androidx.compose.ui.graphics.Color
 
 data class SlippyBadgeStyle(
-    @ColorRes val backgroundColor: Int,
-    @ColorRes val contentColor: Int,
+    @ColorInt val backgroundColor: Color,
+    @ColorInt val contentColor: Color,
 )

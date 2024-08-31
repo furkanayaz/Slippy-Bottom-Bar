@@ -113,7 +113,7 @@ fun SlippyBottomBar(
 
     if (currentPage.value!! > tabs.lastIndex) throw SlippyTabsException(message = ExceptionMessage.START_INDEX_GREATER_MESSAGE.message)
 
-    val divColor: Color = colorResource(id = bar.dividerStyle?.dividerColor ?: R.color.dividerColor)
+    val divColor: Color = bar.dividerStyle?.dividerColor ?: colorResource(R.color.dividerColor)
 
     val barSize: MutableState<IntSize> = remember {
         mutableStateOf(value = IntSize.Zero)
@@ -158,92 +158,83 @@ fun SlippyBottomBar(
         animateColorAsState(
             animationSpec = tween(
                 durationMillis = bar.animationMillis, easing = FastOutLinearInEasing
-            ), targetValue = colorResource(
-                id = if (currentPage.value == index) bar.iconStyle?.enabledIconColor
-                    ?: R.color.enabledIconColor else bar.iconStyle?.disabledIconColor
-                    ?: R.color.disabledIconColor
-            ), label = ""
+            ),
+            targetValue = if (currentPage.value == index) bar.iconStyle?.enabledIconColor
+                ?: colorResource(R.color.enabledIconColor) else bar.iconStyle?.disabledIconColor
+                ?: colorResource(R.color.disabledIconColor),
+            label = ""
         )
     }
 
-    Row(modifier = Modifier
-        .background(
-            color = colorResource(
-                id = bar.barStyle?.backgroundColor ?: R.color.barBackgroundColor
-            )
-        )
-        .fillMaxWidth()
-        .height(intrinsicSize = IntrinsicSize.Max)
-        .onSizeChanged {
-            barSize.value = it
-        }
-        .drawWithCache {
-            when (theme) {
-                SlippyTheme.LINE, SlippyTheme.ROUNDED -> {
-                    //PerformanceTest: Runs until you draw [To perform calculations]
-                    val divHeight: Float =
-                        if (theme == SlippyTheme.LINE) 10.0F else size.height / 1.5F
+    Row(modifier = Modifier.background(
+        color = bar.barStyle?.backgroundColor ?: colorResource(R.color.barBackgroundColor)
+    ).fillMaxWidth().height(intrinsicSize = IntrinsicSize.Max).onSizeChanged {
+        barSize.value = it
+    }.drawWithCache {
+        when (theme) {
+            SlippyTheme.LINE, SlippyTheme.ROUNDED -> {
+                //PerformanceTest: Runs until you draw [To perform calculations]
+                val divHeight: Float = if (theme == SlippyTheme.LINE) 10.0F else size.height / 1.5F
 
-                    val divWidth: Float =
-                        if (theme == SlippyTheme.LINE) (size.width / tabs.size) / 2.0F else size.width / tabs.size
+                val divWidth: Float =
+                    if (theme == SlippyTheme.LINE) (size.width / tabs.size) / 2.0F else size.width / tabs.size
 
-                    val xPosition: Float =
-                        if (theme == SlippyTheme.LINE) animateStartOffset.value.x + divWidth / 2F else animateStartOffset.value.x
+                val xPosition: Float =
+                    if (theme == SlippyTheme.LINE) animateStartOffset.value.x + divWidth / 2F else animateStartOffset.value.x
 
-                    val yPosition: Float =
-                        if (theme == SlippyTheme.LINE) size.height - divHeight else size.height / 2 - (divHeight / 2.0F)
+                val yPosition: Float =
+                    if (theme == SlippyTheme.LINE) size.height - divHeight else size.height / 2 - (divHeight / 2.0F)
 
-                    val divRadius: Float = if (theme == SlippyTheme.LINE) 5.0F else 100.0F / 1.5F
+                val divRadius: Float = if (theme == SlippyTheme.LINE) 5.0F else 100.0F / 1.5F
 
-                    this.onDrawBehind {
-                        //PerformanceTest: Runs continuously
+                this.onDrawBehind {
+                    //PerformanceTest: Runs continuously
 
-                        drawRoundRect(
-                            color = divColor, topLeft = Offset(
-                                x = xPosition, y = yPosition
-                            ), size = Size(
-                                width = divWidth, height = divHeight
-                            ), cornerRadius = CornerRadius(x = divRadius)
-                        )
-                    }
-                }
-
-                else -> {
-                    this.onDrawBehind { /* NO-OP */ }
+                    drawRoundRect(
+                        color = divColor, topLeft = Offset(
+                            x = xPosition, y = yPosition
+                        ), size = Size(
+                            width = divWidth, height = divHeight
+                        ), cornerRadius = CornerRadius(x = divRadius)
+                    )
                 }
             }
-        },
+
+            else -> {
+                this.onDrawBehind { /* NO-OP */ }
+            }
+        }
+    },
         horizontalArrangement = Arrangement.SpaceAround,
         verticalAlignment = Alignment.CenterVertically
     ) {
         tabs.forEachIndexed { index: Int, page: SlippyTab ->
-            Column(modifier = Modifier
-                .fillMaxHeight()
-                .weight(weight = 1.0F, fill = true)
-                .clickable(interactionSource = MutableInteractionSource(), indication = null) {
-                    if (currentPage.value != index) {
-                        currentPage.value = index
-                        page.action?.invoke()
-                    }
-                }
-                .padding(paddingValues = barPadding),
+            Column(
+                modifier = Modifier.fillMaxHeight().weight(weight = 1.0F, fill = true)
+                    .clickable(interactionSource = MutableInteractionSource(), indication = null) {
+                        if (currentPage.value != index) {
+                            currentPage.value = index
+                            page.action?.invoke()
+                        }
+                    }.padding(paddingValues = barPadding),
                 horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.SpaceAround) {
+                verticalArrangement = Arrangement.SpaceAround
+            ) {
 
                 if (page.enableBadge) BadgedBox(badge = {
-                    Badge(containerColor = colorResource(
-                        id = bar.badgeStyle?.backgroundColor ?: R.color.badgeBackgroundColor
-                    ), contentColor = colorResource(
-                        id = bar.badgeStyle?.contentColor ?: R.color.badgeContentColor
-                    ), content = {
-                        Text(
-                            text = page.badgeCount.toString(), fontSize = TextUnit(
-                                value = dimensionResource(
-                                    id = R.dimen.badgeTextSize
-                                ).value, type = TextUnitType.Sp
+                    Badge(containerColor = bar.badgeStyle?.backgroundColor
+                        ?: colorResource(R.color.badgeBackgroundColor),
+                        contentColor = bar.badgeStyle?.contentColor
+                            ?: colorResource(R.color.badgeContentColor),
+                        content = {
+                            Text(
+                                text = page.badgeCount.toString(), fontSize = TextUnit(
+                                    value = dimensionResource(
+                                        id = R.dimen.badgeTextSize
+                                    ).value, type = TextUnitType.Sp
+                                )
                             )
-                        )
-                    })
+                        })
                 }) {
                     GetTabIcon(
                         animateIconColor = animateIconColor.invoke(index).value, page = page
@@ -257,11 +248,11 @@ fun SlippyBottomBar(
                     val animateTextColor: Color by animateColorAsState(
                         animationSpec = tween(
                             durationMillis = bar.animationMillis, easing = FastOutLinearInEasing
-                        ), targetValue = colorResource(
-                            id = if (currentPage.value == index) bar.textStyle?.enabledTextColor
-                                ?: R.color.enabledTextColor else bar.textStyle?.disabledTextColor
-                                ?: R.color.disabledTextColor
-                        ), label = ""
+                        ),
+                        targetValue = if (currentPage.value == index) bar.textStyle?.enabledTextColor
+                            ?: colorResource(R.color.enabledTextColor) else bar.textStyle?.disabledTextColor
+                            ?: colorResource(R.color.disabledTextColor),
+                        label = ""
                     )
 
                     Text(

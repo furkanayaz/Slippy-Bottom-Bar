@@ -21,6 +21,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
@@ -95,16 +96,16 @@ fun SlippyDemonstration(isEnable: Boolean) {
 
     SlippyBottomBar(
         theme = SlippyTheme.LINE, bar = SlippyBar(
-            barStyle = SlippyBarStyle(backgroundColor = R.color.white), textStyle = SlippyTextStyle(
-                enabledTextColor = R.color.enabledTextColor,
-                disabledTextColor = R.color.disabledTextColor
+            barStyle = SlippyBarStyle(backgroundColor = colorResource(R.color.white)), textStyle = SlippyTextStyle(
+                enabledTextColor = colorResource(R.color.enabledTextColor),
+                disabledTextColor = colorResource(R.color.disabledTextColor)
             ), iconStyle = SlippyIconStyle(
-                disabledIconColor = R.color.disabledIconColor,
-                enabledIconColor = R.color.enabledIconColor, // When the round style is chosen, it should be white in color.
+                disabledIconColor = colorResource(R.color.disabledIconColor),
+                enabledIconColor = colorResource(R.color.enabledIconColor), // When the round style is chosen, it should be white in color.
             ), dividerStyle = SlippyDividerStyle(
-                dividerColor = R.color.dividerColor
+                dividerColor = colorResource(R.color.dividerColor)
             ), badgeStyle = SlippyBadgeStyle(
-                backgroundColor = R.color.red, contentColor = R.color.white
+                backgroundColor = colorResource(R.color.red), contentColor = colorResource(R.color.white)
             ), startIndex = 2
         ), tabs = tabs
     )

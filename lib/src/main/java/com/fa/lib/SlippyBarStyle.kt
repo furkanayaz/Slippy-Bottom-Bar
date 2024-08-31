@@ -1,7 +1,8 @@
 package com.fa.lib
 
-import androidx.annotation.ColorRes
+import androidx.annotation.ColorInt
+import androidx.compose.ui.graphics.Color
 
 data class SlippyBarStyle(
-    @ColorRes val backgroundColor: Int
+    @ColorInt val backgroundColor: Color
 )
